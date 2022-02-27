@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ToDoList_Backend_2.Models.TodoList>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Welcome to your list to do</h1>
+
+<p>
+    <a asp-action="Create">Add new ToDo to the list</a>
+</p>
+<script>
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+        .then(response => response.json())
+        .then(json => console.log(json))
+</script>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Content
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+
+                @item.Content
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
